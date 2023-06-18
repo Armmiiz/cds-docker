@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  db:
+    image: mysql:latest
+    container_name: cds_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: Central9Store
+      MYSQL_DATABASE: cds
+      MYSQL_USER: cds
+      MYSQL_PASSWORD: Central9Store
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.0
+    container_name: "cds_phpmyadmin"
+    restart: always
+    links:
+      - db
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+
+  api:
+    build: ./cds-api/
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USERNAME: root
+      DB_PASSWORD: Arm554433
+      DB_NAME: cds
+      DB_PORT: 3306
