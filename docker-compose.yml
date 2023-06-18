@@ -3,12 +3,12 @@ services:
   db:
     image: mysql:latest
     container_name: cds_mysql
-    command: --lower_case_table_names=1
     environment:
       MYSQL_ROOT_PASSWORD: Central9Store
       MYSQL_DATABASE: cds
       MYSQL_USER: cds
       MYSQL_PASSWORD: Central9Store
+      command: --lower_case_table_names=1
     ports:
       - "3306:3306"
     volumes:
