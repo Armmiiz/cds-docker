@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   db:
-    image: mysql:8.0.28
+    image: mysql:latest
     container_name: cds_mysql
     command: --lower_case_table_names=1
     environment:
@@ -9,7 +9,7 @@ services:
       MYSQL_DATABASE: cds
       MYSQL_USER: cds
       MYSQL_PASSWORD: Central9Store
-      command: --lower_case_table_names=1
+      
     ports:
       - "3306:3306"
     volumes:
